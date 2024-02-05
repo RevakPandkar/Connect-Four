@@ -249,7 +249,7 @@ def draw_symbol(win, symbol, symbol_pos):
         pygame.draw.circle(win, (255, 255, 0), (symbol_pos[0], symbol_pos[1]), 43)
 
 
-def draw_start_screen(win, wait_for_input):
+def draw_start_screen(win):
     win.fill((0, 0, 0))
     game_name = title_font.render('Connect Four', True, (255, 255, 255))
     game_name_rect = game_name.get_rect(center=(600, 200))
@@ -286,7 +286,7 @@ def draw_start_screen(win, wait_for_input):
     pvp = False
     playerSym = ""
 
-    if wait_for_input > 60 and pygame.mouse.get_pressed()[0]:
+    if pygame.mouse.get_pressed()[0]:
         mouse_pos = pygame.mouse.get_pos()
         if pvp_button_rect.collidepoint(mouse_pos):
             game_active = True
@@ -480,13 +480,7 @@ while True:
                 draw_black_screen = True
 
     else:
-        game_active, pvp, playerSym = draw_start_screen(win, wait_for_input)
-        wait_for_input += 2
-        if wait_for_input > 70:
-            wait_for_input = 70
-
-        if game_active:
-            wait_for_input = 0
+        game_active, pvp, playerSym = draw_start_screen(win)
 
         if pvp:
             player1Turn = True
